@@ -10,14 +10,14 @@ The scaling factor changes over time, and is looked up based on the current epoc
 
 ## constructor(address token_, bytes memory scaling_, uint256 epoch_)
 initialize the contract
-### token_ is the token that is staked to get voting power
-### scaling_ is an array of uint8 (bytes) percentage discounts for each epoch
-### epoch_ is the duration of one epoch in seconds
+token_ is the token that is staked to get voting power
+scaling_ is an array of uint8 (bytes) percentage discounts for each epoch
+epoch_ is the duration of one epoch in seconds
 
 ## function votingPower(address who) public view returns (uint256) 
 Returns the voting power for `who`
-### who indicates the address whose votingPower to compute
-### returns the voting power for who
+who indicates the address whose votingPower to compute
+returns the voting power for who
     
 ## function stake(uint256 amount) public nonReentrant
 Stakes a certain amount of tokens, this will attempt to transfer the given amount from the caller.
