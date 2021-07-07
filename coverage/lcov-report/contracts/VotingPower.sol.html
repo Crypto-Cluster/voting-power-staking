@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/VotingPower.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> VotingPower.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>30/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>10/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>10/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>30/30</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">pragma solidity ^0.8.4;
+&nbsp;
+&nbsp;
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+&nbsp;
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+&nbsp;
+&nbsp;
+/**
+* @dev Inteface for the token lock features in this contract
+*/
+interface ITOKENLOCK {
+    /**
+     * @dev Emitted when the token lock is initialized  
+     * `tokenHolder` is the address the lock pertains to
+     *  `amountLocked` is the amount of tokens locked 
+     *  `time` is the (initial) time at which tokens were locked
+     *  `unlockPeriod` is the time interval at which tokens become unlockedPerPeriod
+     *  `unlockedPerPeriod` is the amount of token unlocked earch unlockPeriod
+     */
+    event  NewTokenLock(address tokenHolder, uint256 amountLocked, uint256 time, uint256 unlockPeriod, uint256 unlockedPerPeriod);
+    /**
+     * @dev Emitted when the token lock is updated  to be more strict
+     * `tokenHolder` is the address the lock pertains to
+     *  `amountLocked` is the amount of tokens locked 
+     *  `time` is the (initial) time at which tokens were locked
+     *  `unlockPeriod` is the time interval at which tokens become unlockedPerPeriod
+     *  `unlockedPerPeriod` is the amount of token unlocked earch unlockPeriod
+     */
+    event  UpdateTokenLock(address tokenHolder, uint256 amountLocked, uint256 time, uint256 unlockPeriod, uint256 unlockedPerPeriod);
+    
+    /**
+     * @dev Lock `baseTokensLocked_` held by the caller with `unlockedPerEpoch_` tokens unlocking each `unlockEpoch_`
+     *
+     *
+     * Emits an {NewTokenLock} event indicating the updated terms of the token lockup.
+     *
+     * Requires msg.sender to:
+     *
+     * - Must not be a prevoius lock for this address. If so, it must be first cleared with a call to {clearLock}.
+     * - Must have at least a balance of `baseTokensLocked_` to lock
+     * - Must provide non-zero `unlockEpoch_`
+     * - Must have at least `unlockedPerEpoch_` tokens to unlock 
+     *  - `unlockedPerEpoch_` must be greater than zero
+     */
+    
+    function newTokenLock(uint256 baseTokensLocked_, uint256 unlockEpoch_, uint256 unlockedPerEpoch_) external;
+    
+    /**
+     * @dev Reset the lock state
+     *
+     * Requirements:
+     *
+     * - msg.sender must not have any tokens locked, currently
+     */
+    function clearLock() external;
+    
+    /**
+     * @dev Returns the amount of tokens that are unlocked i.e. transferrable by `who`
+     *
+     */
+    function balanceUnlocked(address who) external view returns (uint256 amount);
+    /**
+     * @dev Returns the amount of tokens that are locked and not transferrable by `who`
+     *
+     */
+    function balanceLocked(address who) external view returns (uint256 amount);
+&nbsp;
+    /**
+     * @dev Reduce the amount of token unlocked each period by `subtractedValue`
+     * 
+     * Emits an {UpdateTokenLock} event indicating the updated terms of the token lockup.
+     * 
+     * Requires: 
+     *  - msg.sender must have tokens currently locked
+     *  - `subtractedValue` is greater than 0
+     *  - cannot reduce the unlockedPerEpoch to 0
+     *
+     *  NOTE: As a side effect resets the baseTokensLocked and lockTime for msg.sender 
+     */
+    function decreaseUnlockAmount(uint256 subtractedValue) external;
+    /**
+     * @dev Increase the duration of the period at which tokens are unlocked by `addedValue`
+     * this will have the net effect of slowing the rate at which tokens are unlocked
+     * 
+     * Emits an {UpdateTokenLock} event indicating the updated terms of the token lockup.
+     * 
+     * Requires: 
+     *  - msg.sender must have tokens currently locked
+     *  - `addedValue` is greater than 0
+     * 
+     *  NOTE: As a side effect resets the baseTokensLocked and lockTime for msg.sender 
+     */
+    function increaseUnlockTime(uint256 addedValue) external;
+    /**
+     * @dev Increase the number of tokens locked by `addedValue`
+     * i.e. locks up more tokens.
+     * 
+     *      
+     * Emits an {UpdateTokenLock} event indicating the updated terms of the token lockup.
+     * 
+     * Requires: 
+     *  - msg.sender must have tokens currently locked
+     *  - `addedValue` is greater than zero
+     *  - msg.sender must have sufficient unlocked tokens to lock
+     * 
+     *  NOTE: As a side effect resets the baseTokensLocked and lockTime for msg.sender 
+     *
+     */
+    function increaseTokensLocked(uint256 addedValue) external;
+&nbsp;
+}
+&nbsp;
+/** 
+* @dev Computes voting power based on staked and locked tokens.
+* The deployer is responsible for supplying a token_ implementing ERC20 and ILOCKER. 
+* The deployer is trusted to know &amp; have verified the token code token code is appropriate.
+* A scaling factor is specified as a uint8 array of bytes which serves to 
+* reduce or increase the voting power of a class of token holder (locked tokens). 
+* The scaling factor changes over time, and is looked up based on the current epoch
+*/
+contract VotingPower is ReentrancyGuard{
+    //the token used for staking. Implements ILOCKER. It is trusted &amp; known code.
+    IERC20 _token;
+    //store the number of tokens staked by each address
+    mapping (address =&gt; uint256) private stakedTokens;
+    //store the time of last staking change for an address. For extensibility; coordination with another contract
+    mapping (address =&gt; uint256) public timestamp;
+    //keep track of the sum of staked tokens
+    uint256 private _totalStaked;
+    
+    //events
+    event Staked(address indexed user, uint256 amount);
+    event Unstaked(address indexed user, uint256 amount);
+&nbsp;
+    using SafeERC20 for IERC20;
+&nbsp;
+    //locked tokens have their voting power scaled by this percentage.
+    bytes voteScalingPercent;
+    //the time at which this contract was deployed (unix time)
+    uint256 creationTime;
+    //the time each voting epoch lasts in seconds
+    uint256 epochLength;
+&nbsp;
+    /**
+    * @dev initialize the contract
+    * @param token_ is the token that is staked to get voting power
+    * @param scaling_ is an array of uint8 (bytes) percentage discounts for each epoch
+    * @param epoch_ is the duration of one epoch in seconds
+    **/
+    constructor(address token_, bytes memory scaling_, uint256 epoch_){
+        require(epoch_ &gt; 0);
+        _token = IERC20(token_);
+        creationTime = block.timestamp;
+        voteScalingPercent = scaling_;
+        epochLength = epoch_;
+    }
+&nbsp;
+    /**
+    * @dev Returns the voting power for `who`
+    * @param who the address whose votingPower to compute
+    * @return the voting power for who
+    **/
+    function votingPower(address who) public view returns (uint256) {
+        return _votingPowerStaked(who) + _votingPowerLocked(who);
+    }
+&nbsp;
+    /**
+    * @dev Returns the voting power for `who` due to staked tokens
+    * @param who the address whose votingPower to compute
+    * @return the voting power for who    
+    **/
+    function _votingPowerStaked(address who) internal view returns (uint256) {
+        return stakedTokens[who];
+    }
+    /**
+    * @dev Returns the voting power for `who` due to locked tokens
+    * @param who the address whose votingPower to compute
+    * @return the voting power for who    
+    * Locked tokens scaled discounted voting power as defined by voteScalingPercent
+    **/
+    function _votingPowerLocked(address who) internal view returns (uint256) {
+        uint256 epoch = _currentEpoch();
+        if(epoch &gt;= voteScalingPercent.length){
+            return ITOKENLOCK(address(_token)).balanceLocked(who);
+        }
+        return ITOKENLOCK(address(_token)).balanceLocked(who) * (uint8)(voteScalingPercent[epoch])/100.0;
+    }
+    /**
+    * @dev Returns the current epoch used to look up the scaling factor
+    * @return the current epoch
+    **/
+    function _currentEpoch() internal view returns (uint256) {
+        return (block.timestamp - creationTime)/epochLength;
+    }
+&nbsp;
+    /**
+    * @dev Stakes a certain amount of tokens, this will attempt to transfer the given amount from the caller.
+    * It will count the actual number of tokens trasferred as being staked
+    * MUST trigger Staked event.
+    **/
+    function stake(uint256 amount) public nonReentrant{
+        require(amount &gt; 0, "Cannot Stake 0");
+        uint256 previousAmount = IERC20(_token).balanceOf(address(this));
+        _token.safeTransferFrom( msg.sender, address(this), amount);
+        uint256 transferred = IERC20(_token).balanceOf(address(this)) - previousAmount;
+        stakedTokens[msg.sender] = stakedTokens[msg.sender] + transferred;
+        _totalStaked = _totalStaked + transferred;
+        timestamp[msg.sender] = block.timestamp;
+        emit Staked(msg.sender, transferred);
+    }
+&nbsp;
+    /**
+    * @dev Unstakes a certain amount of tokens, this SHOULD return the given amount of tokens to the caller, 
+    * MUST trigger Unstaked event.
+    */
+    function unstake(uint256 amount) public nonReentrant{
+        require(amount &gt; 0, "Cannot UnStake 0");
+        require(amount &lt;= stakedTokens[msg.sender], "INSUFFICENT TOKENS TO UNSTAKE");
+        _token.safeTransfer( msg.sender, amount);
+        stakedTokens[msg.sender] = stakedTokens[msg.sender] - amount;
+        _totalStaked = _totalStaked - amount;
+        timestamp[msg.sender] = block.timestamp;
+        emit Unstaked(msg.sender, amount);
+    }
+&nbsp;
+    /**
+    * @dev Returns the current total of tokens staked for address addr.
+    */
+    function totalStakedBy(address addr) public view returns (uint256){
+        return stakedTokens[addr];
+    }
+    /**
+    * @dev Returns the number of current total tokens staked.
+    */
+    function totalStaked() public view returns (uint256){
+        return _totalStaked;
+    }
+    /**
+    * @dev address of the token being used by the staking interface
+    */
+    function token() public view returns (address){
+        return address(_token);
+    }
+   
+    
+&nbsp;
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jul 07 2021 20:19:29 GMT+0100 (Western European Summer Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
