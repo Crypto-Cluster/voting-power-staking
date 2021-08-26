@@ -3,10 +3,14 @@ const helper = require('./utils.js');
 
 const VotingPower = artifacts.require("VotingPower");
 const GovernanceToken = artifacts.require("OpenDeFiGovernance");
+const MockStakingProxy = artifacts.require("MockStakingProxy");
+const EvilStakingProxy = artifacts.require("EvilStakingProxy");
 
 contract("VotingPower", accounts => {
     let token;
     let votingPowerInstance;
+    let mockStakingProxyInstance;
+    let evilStakingProxyInstance;
     const tokenName = "TestingToken";
     const tokenSymbol = 'OTT'
     beforeEach(async () => {
@@ -16,13 +20,26 @@ contract("VotingPower", accounts => {
         token = await GovernanceToken.new(tokenName, tokenSymbol, 10000, accounts[0]);
         //75, 50, 25, 0
         votingPowerInstance = await VotingPower.new(token.address, "0x4B3219", 1000);
-        
+        mockStakingProxyInstance = await MockStakingProxy.new(token.address, votingPowerInstance.address, 1);
+        await token.transfer(mockStakingProxyInstance.address, 500, { from: accounts[0] });
+        evilStakingProxyInstance = await EvilStakingProxy.new(token.address, votingPowerInstance.address, 1);
+        await token.transfer(evilStakingProxyInstance.address, 500, { from: accounts[0] });
+
     });
 
     afterEach(async() => {
-        await helper.revertToSnapshot(snapshotId);
+        //await helper.revertToSnapshot(snapshotId);
     });
 
+    //stake for self using mock rewards contract as proxy
+    it("stake: should stake 1000 tokens using mock rewards contract as proxy", async () =>{
+        await token.approve(mockStakingProxyInstance.address, 1000, { from: accounts[0] });
+        await mockStakingProxyInstance.stake(1000, { from: accounts[0] });
+        let stakingBalance = await votingPowerInstance.totalStakedFor.call(accounts[0], {from: accounts[0]});
+        assert.equal(stakingBalance.toNumber(), 1000, "1000 is not staked");
+        
+    });
+/*
     it("creation: should fail when epoch is 0 ", async () =>{
 
         let threw = false
@@ -44,7 +61,7 @@ contract("VotingPower", accounts => {
     it("stake: should stake 1000 tokens in contract", async () =>{
         await token.approve(votingPowerInstance.address, 1000, { from: accounts[0] });
         await votingPowerInstance.stake(1000, { from: accounts[0] });
-        let stakingBalance = await votingPowerInstance.totalStakedBy.call(accounts[0], {from: accounts[0]});
+        let stakingBalance = await votingPowerInstance.totalStakedFor.call(accounts[0], {from: accounts[0]});
         assert.equal(stakingBalance.toNumber(), 1000, "1000 is not staked");
     });
 
@@ -173,44 +190,50 @@ contract("VotingPower", accounts => {
         assert.equal(power4.toNumber(), 1007, "epoch 3: 1007 is not the votingPower");
     });
 
-    //extension
-    it("extension: should display the correct timestamp of last activity", async () =>{
-
-        await token.approve(votingPowerInstance.address, 7, { from: accounts[0] });
-        await votingPowerInstance.stake(7, { from: accounts[0] });
-
-        let block = await web3.eth.getBlock('latest')
-        let time = block['timestamp']
-        console.log(time.toString());
-        let timestamp = await votingPowerInstance.timestamp.call(accounts[0]);
-        console.log(timestamp.toString());
-        assert.strictEqual(timestamp.toString(), time.toString(), "timestamp not stored when staking");
-
-
-        await votingPowerInstance.unstake(3, { from: accounts[0] });
-
-        let block2 = await web3.eth.getBlock('latest')
-        let time2 = block['timestamp']
-        console.log(time2.toString());
-        let timestamp2 = await votingPowerInstance.timestamp.call(accounts[0]);
-        console.log(timestamp2.toString());
-        assert.strictEqual(timestamp2.toString(), time2.toString(), "timestamp not stored when unstaking");
-
+    //stake for self using mock rewards contract as proxy
+    it("stake: should stake 1000 tokens using mock rewards contract as proxy", async () =>{
+        await token.approve(mockStakingProxyInstance.address, 1000, { from: accounts[0] });
+        await mockStakingProxyInstance.stake(1000, { from: accounts[0] });
+        let stakingBalance = await votingPowerInstance.totalStakedFor.call(accounts[0], {from: accounts[0]});
+        assert.equal(stakingBalance.toNumber(), 1000, "1000 is not staked");
+        
     });
+
+    //stake for other using mock rewards contract as proxy
+
+    //voting power is correct when using mock rewards contract as proxy
+
+    //unstake for self using mock rewards contract as proxy - returns tokens to self
+
+    //unstake for other using mock rewards contract as proxy - returns tokens to other
+
+    //only depositor / proxy may witdraw
+
+
+    //voting power is correct when using mock rewards contract as proxy, direct staking, and locked tokens
+
+    //stakeFor returns amount of tokens deposited by the ISTAKINGPROXY contract (= amount actually staked)
+    //consider the case where the proxy contract returns the correct amount and a case where it does not.
+
+    //it is possible for the staking proxy contract to bookkeep so that stakers can get rewards
+
+    
     //test events
 
-    it('events: should emit Staked event properly', async () => {
+    it('events: stake should emit Staked event properly', async () => {
         await token.approve(votingPowerInstance.address, 1000, { from: accounts[0] });
         const res = await votingPowerInstance.stake(1000, { from: accounts[0] });        
         const log = res.logs.find(
           element => element.event.match('Staked') &&
             element.address.match(votingPowerInstance.address)
         )
-        assert.strictEqual(log.args.user, accounts[ 0 ])
+        assert.strictEqual(log.args.staker, accounts[ 0 ])
+        // in this case the user is staking on their own behalf so staker=proxy
+        assert.strictEqual(log.args.proxy, accounts[ 0 ]) 
         assert.strictEqual(log.args.amount.toString(), '1000')
       })
 
-      it('events: should emit UnStaked event properly', async () => {
+      it('events: unstake should emit UnStaked event properly', async () => {
         await token.approve(votingPowerInstance.address, 1000, { from: accounts[0] });
         await votingPowerInstance.stake(1000, { from: accounts[0] });   
         const res = await votingPowerInstance.unstake(500, { from: accounts[0] });
@@ -219,8 +242,15 @@ contract("VotingPower", accounts => {
           element => element.event.match('Unstaked') &&
             element.address.match(votingPowerInstance.address)
         )
-        assert.strictEqual(log.args.user, accounts[ 0 ])
+        //when self-staking staker==proxy==recipient
+        assert.strictEqual(log.args.staker, accounts[ 0 ])
+        assert.strictEqual(log.args.proxy, accounts[ 0 ])
         assert.strictEqual(log.args.amount.toString(), '500')
+        assert.strictEqual(log.args.recipient, accounts[ 0 ])
       })
 
+      //stakeFor should emit Staked event with proxy contract as delegate
+
+      //unStakeFor should emit Staked event with proxy contract as delegate
+*/
 })
